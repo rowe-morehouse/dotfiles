@@ -1,6 +1,6 @@
 ########################################
 ##                                    ##
-##  Rowe Morehouse .profile 20201011  ##
+##  Rowe Morehouse .profile 20201021  ##
 ##                                    ##
 ########################################
 
@@ -20,7 +20,7 @@ unset file
 shopt -s nocaseglob
 
 ##
-## Desktop app aliases.
+## Desktop apps aliases.
 ##
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n $@"
@@ -28,7 +28,7 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias iina='/Applications/IINA.app/Contents/MacOS/IINA'
 
 ##
-## Dev apps and frameworks aliases.
+## Command line apps aliases.
 ##
 
 alias python=/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
@@ -41,7 +41,7 @@ alias serve2="python -m http.server 8500"
 alias serve3="python -m http.server 9000"
 
 ##
-## remember these are available: ffmpeg, ffplay, ffprobe,
+## remember: these apps are available: ffmpeg, ffplay, ffprobe,
 ## rubberband, youtoube-dl, mp4fpsmod, mpv, magick
 ##
 
@@ -89,7 +89,6 @@ else
   alias ls="command ls --color"
   export LS_COLORS='.md=01;35:no=00:fi=01;35:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 fi
-
 
 ##
 ## Git aliases.
@@ -171,14 +170,8 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH=${PATH}:$HOME/gsutil
 export GOOGLE_APPLICATION_CREDENTIALS="/Users/dickhertz/dev/firestone-service-account/firestone-11f592c15c70.json"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin"
-
-##
-## Load RVM into a shell session *as a function*
-##
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
 
 ##
 ## Cool colors to make terminal more fun.
@@ -216,7 +209,6 @@ else
   BOLD=""
   RESET="\033[m"
 fi
-
 
 ##
 ## Only show username / host if not default
@@ -296,4 +288,10 @@ PS1="\[\e]2;$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\]${BOLD}\$
 ##    `*88888*'
 ##      `YY~'
 ##
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 

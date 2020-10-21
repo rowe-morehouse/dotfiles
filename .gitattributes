@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.pdf binary
+*.ai binary
+*.psd binary
+*.wav binary
+*.sketch binary
+Vendor/* linguist-vendored

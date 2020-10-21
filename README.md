@@ -1,4 +1,17 @@
-# Rowe Morehouse .dotfiles
+# Rowe Morehouse | .dotfiles
 
-These are my .dotfiles and settings for local environment and various apps. Hosted here for you to check out, and also for backup / new machine config. 
+  - .dotfiles for my local environment plus some settings for various apps.
+  - Hosted here for you to check out, and for me to back up and get ready to config new machine / boostrap OSX. 
 
+## Install homebrew
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+## Install binaries
+```
+./brew.sh
+```
+
+## Install NVM
+https://github.com/creationix/nvm
