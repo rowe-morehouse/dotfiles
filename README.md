@@ -1,7 +1,7 @@
 # Rowe Morehouse | .dotfiles
 
   - .dotfiles for my local environment plus some settings for various apps.
-  - Hosted here for you to check out, and for me to back up and get ready to config new machine / boostrap OSX. 
+  - Hosted here for you to check out, and for me to back up and get ready to config new machine / bootstrap OSX. 
 
 ## Install homebrew
 ```
