@@ -1,6 +1,6 @@
 ########################################
 ##                                    ##
-##  Rowe Morehouse .profile 20201021  ##
+##  Rowe Morehouse .profile 20201011  ##
 ##                                    ##
 ########################################
 
@@ -99,10 +99,17 @@ alias gcp='git checkout -p'
 alias gap='git add -p'
 alias gaa='git add -A .'
 alias gs='git status'
+alias gb='git branch'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gum='git pull upstream master'
 alias gitlatest='git for-each-ref --sort=-committerdate refs/heads/'
 alias 🖕😏🖕="git push --force"
+
+##
+## autocomplete branch names
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
 
 ##
 ## Untracks anything in your updated .gitignore after accidental file type add
