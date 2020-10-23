@@ -36,9 +36,9 @@ alias pip=/Library/Frameworks/Python.framework/Versions/3.8/bin/pip
 alias webpack=/Users/dickhertz/node_modules/webpack/bin/webpack.js
 alias gridsome=/Users/dickhertz/.npm-global/lib/node_modules/@gridsome/cli/bin/gridsome.js
 alias live-server=/Users/dickhertz/.npm-global/lib/node_modules/live-server/live-server.js
-alias serve="python -m http.server 8000"
-alias serve2="python -m http.server 8500"
-alias serve3="python -m http.server 9000"
+alias serve="python -m http.server 8001"
+alias serve2="python -m http.server 8501"
+alias serve3="python -m http.server 9001"
 
 ##
 ## remember: these apps are available: ffmpeg, ffplay, ffprobe,
@@ -104,6 +104,11 @@ alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gum='git pull upstream master'
 alias gitlatest='git for-each-ref --sort=-committerdate refs/heads/'
 alias 🖕😏🖕="git push --force"
+alias gpo="git push origin"
+alias gc="git commit -m"
+alias gsh="git stash"
+alias gd="git diff"
+alias gpl="git pull origin"
 
 ##
 ## autocomplete branch names
