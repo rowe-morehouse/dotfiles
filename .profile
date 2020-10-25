@@ -1,6 +1,6 @@
 ########################################
 ##                                    ##
-##  Rowe Morehouse .profile 20201011  ##
+##  Rowe Morehouse .profile 20201025  ##
 ##                                    ##
 ########################################
 
@@ -36,9 +36,17 @@ alias pip=/Library/Frameworks/Python.framework/Versions/3.8/bin/pip
 alias webpack=/Users/dickhertz/node_modules/webpack/bin/webpack.js
 alias gridsome=/Users/dickhertz/.npm-global/lib/node_modules/@gridsome/cli/bin/gridsome.js
 alias live-server=/Users/dickhertz/.npm-global/lib/node_modules/live-server/live-server.js
-alias serve="python -m http.server 8001"
-alias serve2="python -m http.server 8501"
-alias serve3="python -m http.server 9001"
+alias serve="python -m http.server 8000"
+alias serve2="python -m http.server 8500"
+alias serve3="python -m http.server 9000"
+
+##
+## Download highest video, or highest qual .wav or .m3, or 16Khz mono audio for speech-to-text
+##
+alias 'ydlv'="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
+alias 'ydlw'="youtube-dl -u --extract-audio --audio-format wav --audio-quality 0 -f bestaudio"
+alias 'ydlm'="youtube-dl -u --extract-audio --audio-format mp3 --audio-quality 0 -f bestaudio"
+alias 'ydlstt'="youtube-dl --extract-audio --audio-format wav --audio-quality 0 --postprocessor-args '-osr 16000 -ac 1'"
 
 ##
 ## remember: these apps are available: ffmpeg, ffplay, ffprobe,
