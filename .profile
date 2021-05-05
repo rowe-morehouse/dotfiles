@@ -1,6 +1,6 @@
 ########################################
 ##                                    ##
-##  Rowe Morehouse .profile 20201025  ##
+##  Rowe Morehouse .profile 20201011  ##
 ##                                    ##
 ########################################
 
@@ -31,26 +31,30 @@ alias iina='/Applications/IINA.app/Contents/MacOS/IINA'
 ## Command line apps aliases.
 ##
 
+alias reveal='open -R'
 alias python=/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
 alias pip=/Library/Frameworks/Python.framework/Versions/3.8/bin/pip
 alias webpack=/Users/dickhertz/node_modules/webpack/bin/webpack.js
 alias gridsome=/Users/dickhertz/.npm-global/lib/node_modules/@gridsome/cli/bin/gridsome.js
 alias live-server=/Users/dickhertz/.npm-global/lib/node_modules/live-server/live-server.js
-alias serve="python -m http.server 8000"
-alias serve2="python -m http.server 8500"
-alias serve3="python -m http.server 9000"
+alias server="python -m http.server 8000"
+alias server2="python -m http.server 8500"
+alias server3="python -m http.server 9000"
 
 ##
-## Download highest video, or highest qual .wav or .m3, or 16Khz mono audio for speech-to-text
+## Download highest video, or highest qual .wav, .mp3, or 16Khz mono audio for speech-to-text
 ##
 alias 'ydlv'="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
-alias 'ydlw'="youtube-dl -u --extract-audio --audio-format wav --audio-quality 0 -f bestaudio"
-alias 'ydlm'="youtube-dl -u --extract-audio --audio-format mp3 --audio-quality 0 -f bestaudio"
-alias 'ydlstt'="youtube-dl --extract-audio --audio-format wav --audio-quality 0 --postprocessor-args '-osr 16000 -ac 1'"
+alias 'ydlw'="youtube-dl -f bestaudio --extract-audio --audio-format wav --audio-quality 0"
+alias 'ydlm'="youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0"
+alias 'ydlwm'="youtube-dl -f bestaudio --extract-audio --audio-format wav --audio-quality 0 --postprocessor-args '-osr 44100 -ac 1'"
+
+alias 'pytt'="pytube -c a.en"
+
 
 ##
 ## remember: these apps are available: ffmpeg, ffplay, ffprobe,
-## rubberband, youtoube-dl, mp4fpsmod, mpv, magick
+## rubberband, youtoube-dl, mp4fpsmod, mpv, magick, what else?
 ##
 
 ##
@@ -113,10 +117,11 @@ alias gum='git pull upstream master'
 alias gitlatest='git for-each-ref --sort=-committerdate refs/heads/'
 alias 🖕😏🖕="git push --force"
 alias gpo="git push origin"
+alias gp="git push"
 alias gc="git commit -m"
 alias gsh="git stash"
 alias gd="git diff"
-alias gpl="git pull origin"
+alias glo="git pull origin"
 
 ##
 ## autocomplete branch names
@@ -171,6 +176,73 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 export HISTTIMEFORMAT='%d-%b-%Y %r '
 
 ##
+## prints the path of the front Finder window. Desktop if no window open
+## http://scriptingosx.com/2017/02/terminal-finder-interaction/
+##
+
+function pwdf () {
+  osascript <<EOS
+    tell application "Finder"
+      if (count of Finder windows) is 0 then
+        set dir to (desktop as alias)
+      else
+        set dir to ((target of Finder window 1) as alias)
+      end if
+      return POSIX path of dir
+    end tell
+EOS
+}
+
+##
+## changes directory to frontmost
+##
+
+alias cdf='pwdf; cd "$(pwdf)"'
+
+
+##
+## ref: https://stackoverflow.com/questions/30789367/ffmpeg-how-to-convert-vertical-video-with-black-sides-to-video-169-with-blur#comment97756806_54618683
+##
+## fill pillar box of image or video with blur
+## aka "echo pillarboxing"
+##
+## usage: fffb input.mp4 output.mp4
+
+function fffb()
+{
+  ffmpeg -i $1 \
+    -vf 'split[original][copy];[copy]scale=ih*16/9:-1,crop=h=iw*9/16,gblur=sigma=20[blurred];[blurred][original]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2' \
+    $2
+}
+
+
+##
+## prints the path of the front Finder window. Desktop if no window open
+## http://scriptingosx.com/2017/02/terminal-finder-interaction/
+##
+
+function pwdf () {
+  osascript <<EOS
+    tell application "Finder"
+      if (count of Finder windows) is 0 then
+        set dir to (desktop as alias)
+      else
+        set dir to ((target of Finder window 1) as alias)
+      end if
+      return POSIX path of dir
+    end tell
+EOS
+}
+
+##
+## changes directory to frontmost finder window
+##
+alias cdf='pwdf; cd "$(pwdf)'
+
+
+
+
+##
 ## PATH MUNGING. Add all of these to the PATH variable. The colon (:)
 ## is the path separator. To "add something to path," add the path to
 ## its executable file to this list of paths here.
@@ -178,9 +250,10 @@ export HISTTIMEFORMAT='%d-%b-%Y %r '
 
 PATH=${PATH}:~/bin
 PATH=${PATH}:/usr/local/bin
-export PATH=$PATH:/Users/dickhertz/.npm-global/node_modules
-export PATH=$PATH:/Users/dickhertz/.npm-global/bin
 export EDITOR="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n $@"
+export PATH=$PATH:/Users/dickhertz/.npm-global/node_modules
+export PATH=$PATH:/usr/local/lib/node_modules/npm
+export PATH=$PATH:/Users/dickhertz/.npm-global/bin
 export PATH=${PATH}:~/dev/adt-bundle/sdk/platform-tools:~/dev/adt-bundle/sdk/tools
 export PATH="/usr/local/Cellar/php54/5.4.33/lib:$PATH"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -188,10 +261,13 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X
 export PATH=$HOME/gems/bin:$PATH
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH=${PATH}:$HOME/gsutil
-export GOOGLE_APPLICATION_CREDENTIALS="/Users/dickhertz/dev/firestone-service-account/firestone-11f592c15c70.json"
 export PATH="$HOME/.cargo/bin:$PATH"
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
+YARN_BIN=$HOME/.config/yarn/bin  # `yarn global bin` result
+export PATH=$YARN_BIN:$PATH
+export PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin
+export GOOGLE_APPLICATION_CREDENTIALS='/Users/dickhertz/.config/gcloud/application_default_credentials.json'
 
 ##
 ## Cool colors to make terminal more fun.
